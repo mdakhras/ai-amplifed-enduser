@@ -12,7 +12,6 @@ trigger:
 jobs:
 - job: build_and_deploy_job
   displayName: Build and Deploy Job
-  condition: or(eq(variables['Build.Reason'], 'Manual'),or(eq(variables['Build.Reason'], 'PullRequest'),eq(variables['Build.Reason'], 'IndividualCI')))
   pool:
     vmImage: ubuntu-latest
   variables:
@@ -20,15 +19,11 @@ jobs:
   steps:
   - checkout: self
     submodules: true
+
   - task: AzureStaticWebApp@0
     inputs:
       azure_static_web_apps_api_token: $(AZURE_STATIC_WEB_APPS_API_TOKEN_NICE_SAND_0F0533103)
-###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
-# For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-      app_location: "/" # App source code path
-      api_location: "" # Api source code path - optional
-      output_location: "" # Built app content directory - optional
-      skip_app_build: true       # <-- prevents Oryx from running/detecting languages
-      skip_api_build: true       # <-- add if you don't have an /api folder
-###### End of Repository/Build Configurations ######
-
+      app_location: "/"          # where package.json and index.html live
+      api_location: ""           # (optional)
+      output_location: "dist"    # Vite build output
+      # DO NOT skip the app build here
