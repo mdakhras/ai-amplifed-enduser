@@ -20,10 +20,22 @@ jobs:
   - checkout: self
     submodules: true
 
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '18.x'              # or 20.x
+
+  - script: npm ci
+    displayName: Install dependencies
+
+  - script: npm run build
+    displayName: Build app
+
+  # If your build emits to something other than "dist", adjust below
   - task: AzureStaticWebApp@0
     inputs:
       azure_static_web_apps_api_token: $(AZURE_STATIC_WEB_APPS_API_TOKEN_NICE_SAND_0F0533103)
-      app_location: "/"          # where package.json and index.html live
-      api_location: ""           # (optional)
-      output_location: "dist"    # Vite build output
-      # DO NOT skip the app build here
+      app_location: "dist"             # <-- deploy the built output folder
+      api_location: ""
+      output_location: ""              # not needed when deploying a prebuilt folder
+      skip_app_build: true             # keep skipping (we already built)
+      skip_api_build: true
