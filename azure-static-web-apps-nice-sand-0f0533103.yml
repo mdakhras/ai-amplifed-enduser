@@ -12,44 +12,22 @@ trigger:
 jobs:
 - job: build_and_deploy_job
   displayName: Build and Deploy Job
+  condition: or(eq(variables['Build.Reason'], 'Manual'),or(eq(variables['Build.Reason'], 'PullRequest'),eq(variables['Build.Reason'], 'IndividualCI')))
   pool:
     vmImage: ubuntu-latest
-
   variables:
-  - group: Azure-Static-Web-Apps-nice-sand-0f0533103-variable-group  # your existing group
-
+  - group: Azure-Static-Web-Apps-nice-sand-0f0533103-variable-group
   steps:
   - checkout: self
-    submodules: false
-
-  # Use Node 20 (or 18) for a stable Vite/Tailwind build
-  - task: NodeTool@0
-    inputs:
-      versionSpec: '20.x'
-    displayName: Use Node.js
-
-  # Install deps (ci if lockfile exists, otherwise install)
-  - script: |
-      if [ -f package-lock.json ]; then
-        echo "Using npm ci"
-        npm ci
-      else
-        echo "No package-lock.json found, using npm install"
-        npm install
-      fi
-    displayName: Install dependencies
-
-  # Build the app -> outputs to dist/
-  - script: npm run build
-    displayName: Build app
-
-  # Deploy the prebuilt dist/ to Azure Static Web Apps
+    submodules: true
   - task: AzureStaticWebApp@0
-    displayName: Deploy to Azure Static Web Apps
     inputs:
       azure_static_web_apps_api_token: $(AZURE_STATIC_WEB_APPS_API_TOKEN_NICE_SAND_0F0533103)
-      app_location: "dist"          # IMPORTANT: this points to your built folder
-      api_location: ""              # no API
-      output_location: ""           # not used when deploying prebuilt
-      skip_app_build: true          # we already built
+
+      # 🔑 Tell it where to look
+      app_location: "dist"     # the dist folder with index.html
+      api_location: ""         # no API folder
+      output_location: ""      # leave empty, since dist is already the output
+
+      skip_app_build: true     # don't build source again
       skip_api_build: true
