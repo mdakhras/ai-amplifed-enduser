@@ -1,21 +1,27 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite'
-import path from 'path'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
+import path from "path";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(),tailwindcss()],
+  plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
   server: {
-    host: '0.0.0.0',
+    host: "0.0.0.0",
+    allowedHosts: [
+      "f24aaf5c-98ca-49b6-940f-ffbc0b4fdbfd-00-2ynkppvzlhxls.worf.replit.dev", // replit preview host,
+      "localhost",
+      "127.0.0.1",
+      "0.0.0.0",
+    ],
     port: 5000,
     hmr: {
-      clientPort: 443
-    }
-  }
-})
+      clientPort: 443,
+    },
+  },
+});
