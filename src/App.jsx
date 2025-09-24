@@ -1034,7 +1034,7 @@ International partners include UN agencies, bilateral donors, regional organizat
                 <Button 
                   variant="outline" 
                   className="w-full"
-                  onClick={() => navigateToDonorIntelligence('proposal-development')}
+                  onClick={() => window.open('https://ashy-sand-0933f7803.1.azurestaticapps.net/', '_blank')}
                 >
                   Get Started
                 </Button>
