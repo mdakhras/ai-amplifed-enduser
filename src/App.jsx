@@ -627,8 +627,11 @@ International partners include UN agencies, bilateral donors, regional organizat
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600 mb-4">Discover guided prompts to help with research and ideation</p>
-                <Button variant="outline" className="w-full" disabled>
-                  Coming Soon
+                <Button 
+                  className="w-full bg-teal-600 hover:bg-teal-700"
+                  onClick={() => window.open('https://iom-d-we-datallmpoc-prompt-lib-01-eyecendrdnbndbgw.westeurope-01.azurewebsites.net/', '_blank')}
+                >
+                  Prompts Library
                 </Button>
               </CardContent>
             </Card>
