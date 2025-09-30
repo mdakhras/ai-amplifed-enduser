@@ -575,7 +575,7 @@ International partners include UN agencies, bilateral donors, regional organizat
                 <p className="text-gray-600 mb-4">Create a new concept note with AI assistance</p>
                 <Button 
                   className="w-full bg-blue-600 hover:bg-blue-700"
-                  onClick={() => window.open('https://5724f7d4-4ab0-4466-af70-906447cc4abd-00-ex7d6n97q823.riker.replit.dev/', '_blank')}
+                  onClick={() => setCurrentView('concept-form')}
                 >
                   Create Concept Note
                 </Button>
