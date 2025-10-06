@@ -611,7 +611,7 @@ International partners include UN agencies, bilateral donors, regional organizat
                 <p className="text-gray-600 mb-4">Research donors and funding opportunities for your concept</p>
                 <Button 
                   className="w-full bg-purple-600 hover:bg-purple-700"
-                  onClick={() => navigateToDonorIntelligence('conceptualization')}
+                  onClick={() => window.open('https://ashy-sand-0933f7803.1.azurestaticapps.net/', '_blank')}
                 >
                   Research Donors
                 </Button>
